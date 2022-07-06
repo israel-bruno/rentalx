@@ -26,6 +26,7 @@ describe("Create Car Specification", () => {
         car_id,
         specifications_id,
       });
+      ("");
     }).rejects.toBeInstanceOf(AppError);
   });
 
@@ -42,14 +43,17 @@ describe("Create Car Specification", () => {
 
     const specification = await specificationsRepositoryInMemory.create({
       description: "test",
-      name: "test",
+      name: "teste",
     });
 
-    const specifications_id = ["123123"];
+    const specifications_id = [specification.id!];
 
-    await createCarSpecificationUseCase.execute({
+    const specificationCars = await createCarSpecificationUseCase.execute({
       car_id: car.id,
       specifications_id,
     });
+
+    expect(specificationCars).toHaveProperty("specifications");
+    expect(specificationCars.specifications?.length).toBe(1);
   });
 });
