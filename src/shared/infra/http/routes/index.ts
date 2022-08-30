@@ -15,3 +15,4 @@ router.use("/cars", carRoutes);
 router.use("/rentals", rentalRoutes);
 router.use("/sessions", authenticateRoutes);
 export { router };
+ 
